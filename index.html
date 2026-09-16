@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SE25UCSE019_Pro_Max_Assignment</title>
+    <style>
+        /* Premium Superhuman Glassmorphism & 3D Orb Variables */
+        :root {
+            --bg-base: #170d36;
+            /* Deep purple/navy base from 1st ref */
+
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.3);
+
+            --accent-primary: #ff5005;
+            /* Vibrant orange from 2nd ref */
+            --accent-secondary: #d0bce1;
+            /* Light purple from 2nd ref */
+
+            --text-light: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.65);
+
+            --mac-red: #ff5f56;
+            --mac-yellow: #ffbd2e;
+            --mac-green: #27c93f;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-light);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        /* 
+         * 3D FLOATING SPHERES (Matching Reference 1 exactly)
+         * Using the colors from Reference 2 
+         */
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            /* Radial gradients create the 3D shading effect without blurring the edges */
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Light Purple Sphere */
+        .orb-1 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle at 35% 35%, #f1e4ff, #d0bce1 40%, #7e4baf 90%, #301050 100%);
+            top: -10%;
+            left: -10%;
+        }
+
+        /* Bright Orange Sphere */
+        .orb-2 {
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle at 35% 35%, #ff8e5e, #ff5005 45%, #912200 85%, #380700 100%);
+            bottom: -15%;
+            right: -15%;
+        }
+
+        /* Magenta/Pink Sphere */
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle at 35% 35%, #ffa6ea, #d946ef 45%, #7a108a 85%, #2a0033 100%);
+            top: 30%;
+            left: 65%;
+        }
+
+        /* Beige Sphere */
+        .orb-4 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle at 35% 35%, #fff2e3, #dbba95 45%, #856139 85%, #301f0e 100%);
+            bottom: 20%;
+            left: -5%;
+        }
+
+        .page {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 
+         * PREMIUM FROSTED GLASS PANELS
+         */
+        .glass-panel,
+        .question-block,
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid var(--glass-border);
+            /* Crisp top and left white highlights for premium glass feel */
+            border-top: 1px solid var(--glass-highlight);
+            border-left: 1px solid var(--glass-highlight);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* COVER PAGE */
+        .cover-wrapper {
+            position: relative;
+            height: 980px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            /* Centers children */
+            overflow: hidden;
+            padding: 60px;
+            box-sizing: border-box;
+            z-index: 1;
+            margin-bottom: 60px;
+        }
+
+        .cover-top {
+            text-align: center;
+            width: 100%;
+        }
+
+        .cover-top h1 {
+            color: var(--text-light);
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            margin: 0 0 15px 0;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .cover-top h2 {
+            color: var(--text-muted);
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        /* CENTERED PIXEL ART */
+        .pixel-art-container {
+            width: 100%;
+            max-width: 480px;
+            /* Perfect size for the cover */
+            aspect-ratio: 1 / 1;
+            margin: 0 auto;
+            /* Ensures it stays dead center */
+            border-radius: 24px;
+            overflow: hidden;
+            border: 2px solid var(--glass-highlight);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            background: #000;
+        }
+
+        .pixel-art-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Information Table on Cover */
+        .student-info {
+            width: 100%;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 15px;
+            font-size: 15px;
+            letter-spacing: 1.5px;
+            box-sizing: border-box;
+        }
+
+        .student-info strong {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .student-info span {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Section Title (Gradient Pill) */
+        .section-title {
+            background: linear-gradient(90deg, #d0bce1 0%, #ff5005 100%);
+            color: #fff;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 80, 5, 0.3);
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        /* Overview Tables */
+        .overview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .overview-table th {
+            text-align: left;
+            padding: 12px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--glass-border);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .overview-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            vertical-align: top;
+        }
+
+        .overview-table td:first-child {
+            font-weight: 700;
+            color: var(--accent-secondary);
+        }
+
+        /* Question Blocks */
+        .question-block {
+            padding: 40px;
+            margin-bottom: 60px;
+            page-break-inside: avoid;
+        }
+
+        .question-title {
+            font-size: 22px;
+            color: var(--text-light);
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .question-ask {
+            margin-bottom: 30px;
+        }
+
+        .question-ask h4 {
+            color: var(--text-muted);
+            margin: 0 0 10px 0;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .question-ask p {
+            margin: 0;
+            font-size: 15px;
+            color: var(--text-light);
+        }
+
+        /* Code Explanation Block */
+        .code-explanation {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--accent-primary);
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+        }
+
+        .code-explanation h4 {
+            color: var(--accent-secondary);
+            margin: 0 0 12px 0;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .code-explanation ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .code-explanation li {
+            margin-bottom: 8px;
+        }
+
+        /* Mac-Style Code Block */
+        .mac-window {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            page-break-inside: avoid;
+            box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .mac-header {
+            padding: 12px 20px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .mac-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .mac-dot.red {
+            background-color: var(--mac-red);
+        }
+
+        .mac-dot.yellow {
+            background-color: var(--mac-yellow);
+        }
+
+        .mac-dot.green {
+            background-color: var(--mac-green);
+        }
+
+        pre {
+            margin: 0;
+            padding: 25px;
+            overflow-x: auto;
+            color: #e2e8f0;
+            font-size: 13px;
+            font-family: "JetBrains Mono", "SF Mono", "Fira Code", "Courier New", monospace;
+        }
+
+        /* Image Output */
+        .terminal-output h4 {
+            color: var(--text-muted);
+            margin: 0 0 15px 0;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .terminal-output p {
+            margin: 0 0 15px 0;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .terminal-output img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: block;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            .page {
+                padding: 0 20px;
+                max-width: 100%;
+            }
+
+            body {
+                background: #170d36 !important;
+            }
+
+            .bg-orbs {
+                display: block !important;
+            }
+
+            .glass-panel,
+            .question-block,
+            .glass-card {
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating 3D Spheres -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+
+    <div class="page">
+
+        <!-- PRO MAX COVER PAGE -->
+        <div class="glass-panel cover-wrapper">
+
+            <div class="cover-top">
+                <h1>ACADEMIC SUBMISSION / 2026</h1>
+                <h2>ASSIGNMENT 1 & 2 - Shell Scripting & Git</h2>
+            </div>
+
+            <!-- Centered Pixel Art Image -->
+            <div class="pixel-art-container">
+                <img src="/Users/mohammadbaig/myprj/Screenshot 2026-09-16 at 23.01.26.png"
+                    alt="Cityscape Sunset Pixel Art">
+            </div>
+
+            <div class="glass-card student-info">
+                <strong>NAME</strong> <span>Mohammad Baig</span>
+                <strong>ROLL NO.</strong> <span>SE25UCSE019</span>
+                <strong>LANGUAGE</strong> <span>Bash Shell Scripting & Git</span>
+                <strong>PLATFORM</strong> <span>macOS Terminal / Bash</span>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- ASSIGNMENT 1 OVERVIEW -->
+        <div class="section-title">ASSIGNMENT 01 / OVERVIEW</div>
+        <div class="glass-panel question-block" style="margin-bottom: 40px;">
+            <div class="question-ask">
+                <h4>Requirements at a glance</h4>
+                <p>The assignment covers numerical operations, loops, student grading, file permissions, file analysis
+                    and array processing with a user-defined reverse function. It also requires meaningful variable
+                    names, indentation, comments, validation and suitable error handling.</p>
+            </div>
+
+            <table class="overview-table">
+                <tr>
+                    <th>ID</th>
+                    <th>TASK</th>
+                    <th>FOCUS</th>
+                </tr>
+                <tr>
+                    <td>Q1</td>
+                    <td>Numerical Analysis Utility</td>
+                    <td>Compare two integers, calculate their sum, validate input, and divide with a zero check.</td>
+                </tr>
+                <tr>
+                    <td>Q2</td>
+                    <td>Number Processing using Loops</td>
+                    <td>Factorial with while, prime check, reverse with while, and digit sum with until.</td>
+                </tr>
+                <tr>
+                    <td>Q3</td>
+                    <td>Student Performance Analyzer</td>
+                    <td>Store marks in an array, validate them, and assign A/B/C/Fail grades.</td>
+                </tr>
+                <tr>
+                    <td>Q4</td>
+                    <td>Project File and Permission Analyzer</td>
+                    <td>Check file existence and readable / writable / executable permissions.</td>
+                </tr>
+                <tr>
+                    <td>Q5</td>
+                    <td>File Discovery and Storage Analysis</td>
+                    <td>List .txt files and display the five largest files recursively.</td>
+                </tr>
+                <tr>
+                    <td>Q6</td>
+                    <td>Array Processing and Debugging</td>
+                    <td>Store names, reverse them with a function, display both arrays, and run with bash -v.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Q1 -->
+        <div class="section-title">ASSIGNMENT 01 / SHELL SCRIPTING</div>
+        <div class="glass-panel question-block">
+            <div class="question-title">Question 1 - Numerical Analysis Utility</div>
+
+            <div class="question-ask">
+                <h4>What The Question Asks</h4>
+                <p>Read two integers, compare them, calculate their sum, validate the input and perform division only
+                    when the divisor is not zero.</p>
+            </div>
+
+            <div class="code-explanation">
+                <h4>How The Script Works</h4>
+                <ul>
+                    <li>The script reads and validates both numbers with an integer pattern before doing calculations.
+                    </li>
+                    <li>The comparison uses Bash numeric operators such as -gt and -lt rather than string comparison.
+                    </li>
+                    <li>The sum is calculated with arithmetic expansion.</li>
+                    <li>Before division, the second number is checked against zero. If it is zero, the script prints an
+                        error instead of attempting division.</li>
+                </ul>
+            </div>
+
+            <div class="mac-window">
+                <div class="mac-header">
+                    <div class="mac-dot red"></div>
+                    <div class="mac-dot yellow"></div>
+                    <div class="mac-dot green"></div>
+                </div>
+                <pre><code>#!/bin/bash
+#SE25UCSE019-MOHAMMAD BAIG
+
+echo "Coded by SE25UCSE019 - Mohammad Baig"
+echo "Enter First Number"
+read firstnum
+
+if ! [[ $firstnum =~ ^-?[0-9]+$ ]]; then
+    echo "Invalid input. Please enter an integer."
+    exit 1
+fi
+
+echo "Enter Second Number"
+read secondnum
+
+if ! [[ $secondnum =~ ^-?[0-9]+$ ]]; then
+    echo "Invalid input. Please enter an integer."
+    exit 1
+fi
+
+if [ $firstnum -gt $secondnum ]; then
+    echo "First Number is Greater Than The Second One"
+elif [ $firstnum -lt $secondnum ]; then
+    echo "First Number is Smaller Than The Second One"
+else
+    echo "Both The Numbers Are Equal"
+fi
+
+sum=$(($firstnum + $secondnum))
+echo "Sum of The Numbers is $sum"
+
+if [ $secondnum -eq 0 ]; then
+    echo "Division by Zero is Not Allowed"
+else
+    divresult=$(($firstnum / $secondnum))
+    echo "Result of Division is $divresult"
+fi</code></pre>
+            </div>
+
+            <div class="terminal-output">
+                <h4>Terminal Output / Result Snapshot</h4>
+                <img src="/Users/mohammadbaig/myprj/a1q1.png" alt="Q1 Output 1" onerror="this.style.display='none'">
+                <img src="/Users/mohammadbaig/myprj/a1q1,2.png" alt="Q1 Output 2" onerror="this.style.display='none'">
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Q2 -->
+        <div class="glass-panel question-block">
+            <div class="question-title">Question 2 - Number Processing using Loops</div>
+
+            <div class="question-ask">
+                <h4>What The Question Asks</h4>
+                <p>Accept a non-negative integer and calculate its factorial, test whether it is prime, reverse it and
+                    find the sum of its digits.</p>
+            </div>
+
+            <div class="code-explanation">
+                <h4>How The Script Works</h4>
+                <ul>
+                    <li>The input is validated so the script accepts non-negative integer values.</li>
+                    <li>A while loop repeatedly multiplies the current value into the factorial and decreases the
+                        number.</li>
+                    <li>The prime check tests divisibility and stops early when a divisor is found.</li>
+                    <li>Another while loop extracts the last digit using modulo 10 and builds the reversed number.</li>
+                    <li>The digit-sum section uses an until loop as required by the question.</li>
+                </ul>
+            </div>
+
+            <div class="mac-window">
+                <div class="mac-header">
+                    <div class="mac-dot red"></div>
+                    <div class="mac-dot yellow"></div>
+                    <div class="mac-dot green"></div>
+                </div>
+                <pre><code>#!/bin/bash
+#SE25UCSE019-MOHAMMAD BAIG
+echo "Coded by SE25UCSE019 - Mohammad Baig"
+echo "Enter A Number"
+read num
+if ! [[ $num =~ ^[0-9]+$ ]]; then
+    echo "Invalid input. Please enter a +ve integer."
+    exit 1
+fi
+original_num=$num
+
+fact=1
+while [ $num -gt 0 ]; do
+    ((fact = fact * num))
+    ((num--))
+done
+echo "Factorial is $fact"
+
+i=2
+is_prime=1
+while [ $i -lt $original_num ]; do
+    if [ $(($original_num % $i)) -eq 0 ]; then
+        is_prime=0
+        break
+    fi
+    ((i++))
+done
+
+if [ $is_prime -eq 1 ]; then
+    echo "Given Number is Prime"
+else
+    echo "Given Number is Not A Prime"
+fi
+
+reverse=0
+temp=$original_num
+while [ $temp -gt 0 ]; do
+    digit=$((temp % 10))
+    reverse=$((reverse*10+digit))
+    temp=$((temp/10))
+done
+echo "Reverse is $reverse"
+
+sum=0
+temp2=$original_num
+until [ $temp2 -eq 0 ]; do
+    digit=$((temp2 % 10))
+    sum=$((sum + digit))
+    temp2=$((temp2 / 10))
+done
+echo "Sum of the digits is $sum"</code></pre>
+            </div>
+
+            <div class="terminal-output">
+                <h4>Terminal Output / Result Snapshot</h4>
+                <img src="/Users/mohammadbaig/myprj/a1q2.png" alt="Q2 Output" onerror="this.style.display='none'">
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Q3 -->
+        <div class="glass-panel question-block">
+            <div class="question-title">Question 3 - Student Performance Analyzer</div>
+
+            <div class="question-ask">
+                <h4>What The Question Asks</h4>
+                <p>Store marks of multiple students in an array, validate the marks and assign A, B, C or Fail according
+                    to the given ranges.</p>
+            </div>
+
+            <div class="code-explanation">
+                <h4>How The Script Works</h4>
+                <ul>
+                    <li>The number of students is read first and validated as a non-negative integer.</li>
+                    <li>A marks array is created and filled inside a for loop.</li>
+                    <li>Each mark is checked to make sure it is an integer and does not exceed 100.</li>
+                    <li>A second loop reads each stored mark and checks the grade boundaries in descending order.</li>
+                    <li>If invalid data is entered, the script displays an error and exits with status 1.</li>
+                </ul>
+            </div>
+
+            <div class="mac-window">
+                <div class="mac-header">
+                    <div class="mac-dot red"></div>
+                    <div class="mac-dot yellow"></div>
+                    <div class="mac-dot green"></div>
+                </div>
+                <pre><code>#!/bin/bash
+#SE25UCSE019-MOHAMMAD BAIG
+echo "Coded by SE25UCSE019 - Mohammad Baig"
+echo "Numer Of Students"
+read num_of_students
+if ! [[ $num_of_students =~ ^[0-9]+$ ]]; then
+    echo "Invalid input. Please enter a +ve integer."
+    exit 1
+fi
+marks=()
+for(( i=0; i < num_of_students; i++ )); do
+    echo "Enter Marks of Student $((i+1))"
+    read Student_Marks
+    if ! [[ $Student_Marks =~ ^[0-9]+$ ]]; then
+        echo "Invalid input. Please enter a +ve integer."
+        exit 1
+    fi
+    if [ $Student_Marks -gt 100 ]; then
+        echo "Invalid Input. Please Enter Marks B/W 0-100"
+        exit 1
+    fi
+    marks[$i]=$Student_Marks
+done
+
+for (( i=0; i<num_of_students; i++ )); do
+    mark=${marks[$i]}
+    if [ $mark -ge 90 ]; then
+        echo "Student $((i+1)): $mark - Grade A"
+    elif [ $mark -ge 75 ]; then
+        echo "Student $((i+1)): $mark - Grade B"
+    elif [ $mark -ge 50 ]; then
+        echo "Student $((i+1)): $mark - Grade C"
+    else
+        echo "Student $((i+1)): $mark - Fail"
+    fi
+done</code></pre>
+            </div>
+
+            <div class="terminal-output">
+                <h4>Terminal Output / Result Snapshot</h4>
+                <img src="/Users/mohammadbaig/myprj/a1q3.png" alt="Q3 Output" onerror="this.style.display='none'">
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Q4 -->
+        <div class="glass-panel question-block">
+            <div class="question-title">Question 4 - Project File and Permission Analyzer</div>
+
+            <div class="question-ask">
+                <h4>What The Question Asks</h4>
+                <p>Accept a filename, check whether it exists, then report whether it is readable, writable and
+                    executable.</p>
+            </div>
+
+            <div class="code-explanation">
+                <h4>How The Script Works</h4>
+                <ul>
+                    <li>The filename is read from the user.</li>
+                    <li>The -f test checks that the supplied name refers to a regular file.</li>
+                    <li>The -r, -w and -x tests check read, write and execute permissions.</li>
+                    <li>If the file is missing, the script prints an error and exits with a non-zero status.</li>
+                </ul>
+            </div>
+
+            <div class="mac-window">
+                <div class="mac-header">
+                    <div class="mac-dot red"></div>
+                    <div class="mac-dot yellow"></div>
+                    <div class="mac-dot green"></div>
+                </div>
+                <pre><code>#!/bin/bash
+#SE25UCSE019 -Mohammad baig
+echo "Coded by SE25UCSE019 - Mohammad Baig"
+echo "Enter File Name"
+read filename
+
+if [ -f "$filename" ]; then
+    if [ -r "$filename" ]; then echo "File is readable"; else echo "File is not readable"; fi
+    if [ -w "$filename" ]; then echo "File is Writable"; else echo "File is not Writeable"; fi
+    if [ -x "$filename" ]; then echo "File is Executable"; else echo "File is not Executable"; fi
+else
+    echo "Error. File Doesnot Exist"
+    exit 1
+fi</code></pre>
+            </div>
+
+            <div class="terminal-output">
+                <h4>Terminal Output / Result Snapshot</h4>
+                <img src="/Users/mohammadbaig/myprj/a1q4.png" alt="Q4 Output" onerror="this.style.display='none'">
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Q5 -->
+        <div class="glass-panel question-block">
+            <div class="question-title">Question 5 - File Discovery and Storage Analysis</div>
+
+            <div class="question-ask">
+                <h4>What The Question Asks</h4>
+                <p>Display all .txt files in the current directory and identify the five largest files in a specified
+                    directory including its subdirectories.</p>
+            </div>
+
+            <div class="code-explanation">
+                <h4>How The Script Works</h4>
+                <ul>
+                    <li>The .txt files are found using a for loop with the *.txt pattern.</li>
+                    <li>The -f test makes sure the matched item is a regular file.</li>
+                    <li>The directory is validated with -d before searching.</li>
+                    <li>find with -type f searches files recursively rather than directories.</li>
+                    <li>du -k provides sizes in KB, sort -nr puts the largest sizes first, and head -5 keeps the first
+                        five results.</li>
+                </ul>
+            </div>
+
+            <div class="mac-window">
+                <div class="mac-header">
+                    <div class="mac-dot red"></div>
+                    <div class="mac-dot yellow"></div>
+                    <div class="mac-dot green"></div>
+                </div>
+                <pre><code>#!/bin/bash
+# SE25UCSE019 - MOHAMMAD BAIG
+echo "Coded by SE25UCSE019 - Mohammad Baig"
+
+for file in *.txt; do
+    if [ -f "$file" ]; then
+        echo "$file"
+    fi
+done
+
+echo "Enter directory"
+read directory
+
+if [ ! -d "$directory" ]; then
+    echo "Directory does not exist"
+    exit 1
+fi
+
+find "$directory" -type f -exec du -k {} + | sort -nr | head -5</code></pre>
+            </div>
+
+            <div class="terminal-output">
+                <h4>Terminal Output / Result Snapshot</h4>
+                <img src="/Users/mohammadbaig/myprj/a1q5.png" alt="Q5 Output" onerror="this.style.display='none'">
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Q6 -->
+        <div class="glass-panel question-block">
+            <div class="question-title">Question 6 - Array Processing and Debugging</div>
+
+            <div class="question-ask">
+                <h4>What The Question Asks</h4>
+                <p>Store names in an array, display the original array, reverse it using a user-defined function,
+                    display the reversed array and run the script with bash -v.</p>
+            </div>
+
+            <div class="code-explanation">
+                <h4>How The Script Works</h4>
+                <ul>
+                    <li>StudentNames is used as the array for the names entered by the user.</li>
+                    <li>The original array is displayed using array expansion that prints all elements.</li>
+                    <li>The script calculates the last array index by taking the array length minus one.</li>
+                    <li>ReverseArray is the user-defined function; it starts from the last index and stores each name
+                        into a new reversed array.</li>
+                    <li>The script is executed with bash -v so Bash prints the script lines as they are read.</li>
+                </ul>
+            </div>
+
+            <div class="mac-window">
+                <div class="mac-header">
+                    <div class="mac-dot red"></div>
+                    <div class="mac-dot yellow"></div>
+                    <div class="mac-dot green"></div>
+                </div>
+                <pre><code>#!/bin/bash
+# SE25UCSE139 - MOHAMMAD BAIG
+echo "Coded by SE25UCSE019 - Mohammad Baig"
+echo "Enter No. Of students"
+read NumofStudents
+StudentNames=()
+
+for (( i=0; i < NumofStudents; i++ )); do
+    echo "Enter Name Of Student $((i+1))"
+    read names
+    StudentNames[$i]=$names
+done
+
+echo "Original Array:- "
+printf "%s, " "${StudentNames[@]}"
+echo
+
+lastindex=$(( ${#StudentNames[@]} - 1 ))
+
+ReverseArray() {
+    i=0
+    for (( j=$lastindex; j>=0; j-- )); do
+        ReversedNames[i]=${StudentNames[j]}
+        ((i++))
+    done
+}
+
+ReverseArray
+
+echo "Reversed Array is:-"
+printf "%s, " "${ReversedNames[@]}"
+echo</code></pre>
+            </div>
+
+            <div class="terminal-output">
+                <h4>Terminal Output / Result Snapshot</h4>
+                <img src="/Users/mohammadbaig/Desktop/a1q6.png" alt="Q6 Output 1" onerror="this.style.display='none'">
+                <img src="/Users/mohammadbaig/myprj/a1q6_2.png" alt="Q6 Output 2" onerror="this.style.display='none'">
+            </div>
+
+            <!-- Q6 Verbose Section -->
+            <div class="question-ask" style="margin-top: 40px;">
+                <h4
+                    style="color: var(--text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;">
+                    Question 6(d) - Verbose execution with bash -v
+                </h4>
+                <p>The assignment specifically asks to execute the script with Bash's verbose option. The command used
+                    was: <code>bash -v Q6_Array_Processing.sh</code>. With -v, Bash prints each script line as it reads
+                    it, so the terminal shows both the source statements and the resulting prompts and output.</p>
+            </div>
+
+            <div class="terminal-output">
+                <h4>Verbose Run Output</h4>
+                <img src="/Users/mohammadbaig/myprj/a1q6,2.png" alt="Q6 Verbose Output"
+                    onerror="this.style.display='none'">
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- ASSIGNMENT 2 OVERVIEW -->
+        <div class="section-title">ASSIGNMENT 02 OVERVIEW</div>
+        <div class="glass-panel question-block" style="margin-bottom: 40px;">
+            <div class="question-ask">
+                <h4>What I did in this assignment</h4>
+                <p>For this assignment I used Git to keep track of a small Student Grade Calculator project. I first
+                    created the local repository, added the project files and made commits. After that I created tags
+                    and branches, merged changes, created and resolved a merge conflict, used stash for unfinished work,
+                    checked the history and differences, and finally connected the project to GitHub and pushed it.</p>
+            </div>
+
+            <table class="overview-table">
+                <tr>
+                    <th style="width: 50px;">#</th>
+                    <th>REQUIREMENTS</th>
+                </tr>
+                <tr>
+                    <td>01</td>
+                    <td>Create the project, initialize Git, configure identity and add files.</td>
+                </tr>
+                <tr>
+                    <td>02</td>
+                    <td>Develop the project and maintain its history with staging and commits.</td>
+                </tr>
+                <tr>
+                    <td>03</td>
+                    <td>Create versions and mark them using tags such as v1.0 and v2.0.</td>
+                </tr>
+                <tr>
+                    <td>04</td>
+                    <td>Create feature and bug-fix branches and merge them into master.</td>
+                </tr>
+                <tr>
+                    <td>05</td>
+                    <td>Create a merge conflict, resolve it and complete the merge.</td>
+                </tr>
+                <tr>
+                    <td>06</td>
+                    <td>Use Git stash to temporarily save and restore unfinished work.</td>
+                </tr>
+                <tr>
+                    <td>07</td>
+                    <td>Use history and comparison commands to examine changes.</td>
+                </tr>
+                <tr>
+                    <td>08</td>
+                    <td>Connect the project to a remote repository and push it.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- ASSIGNMENT 2 STEPS -->
+        <div class="section-title">ASSIGNMENT 02 / GIT WORKFLOW</div>
+
+        <div class="glass-panel question-block">
+
+            <h4 class="question-title" style="font-size: 18px;">Requirement 1 & 2 - Creating the project and project
+                history</h4>
+            <div class="terminal-output">
+                <p>I first moved into the Student_grade_calculator folder and checked the current location with pwd.
+                    Then I used ls to see index.html, script.js and style.css. Next I ran git init, configured my Git
+                    username and email, checked status and staged the project files with git add. After staging the
+                    files, I made the first commit with the message Initial project setup, then committed script.js
+                    separately with the message Have added grade calculation function, and used git log-oneline to
+                    confirm both commits.</p>
+                <img src="/Users/mohammadbaig/myprj/Screenshot 2026-09-16 at 09.39.13.png" alt="Git Init"
+                    onerror="this.style.display='none'">
+            </div>
+
+            <br>
+            <h4 class="question-title" style="font-size: 18px; margin-top: 30px;">Requirement 3 - Creating versions with
+                tags</h4>
+            <div class="terminal-output">
+                <p>After the first two commits, I created the first release tag using git tag v1.0 and checked it with
+                    git tag. I then improved index.html, committed the change and created v2.0. The decorated log showed
+                    the tags attached to the corresponding commits.</p>
+                <img src="/Users/mohammadbaig/myprj/Screenshot 2026-09-16 at 09.45.00.png" alt="Git Tags"
+                    onerror="this.style.display='none'">
+            </div>
+
+            <br>
+            <h4 class="question-title" style="font-size: 18px; margin-top: 30px;">Requirement 4 - Feature and bug-fix
+                branches</h4>
+            <div class="terminal-output">
+                <p>I created feature-ui and switched to it, added a line to the interface and committed the change. I
+                    switched back to master, created bug-fix, merged feature-ui and then merged bug-fix; Git reported
+                    nothing new to merge.</p>
+                <img src="/Users/mohammadbaig/myprj/Screenshot 2026-09-16 at 09.53.02.png" alt="Git Merge"
+                    onerror="this.style.display='none'">
+            </div>
+
+            <div class="page-break"></div>
+
+            <h4 class="question-title" style="font-size: 18px;">Requirement 5 - Creating and resolving a merge conflict
+            </h4>
+            <div class="terminal-output">
+                <p>I created a conflict-test branch and changed index.html there, then committed it. After creating a
+                    separate master change to the same file, the second merge reported CONFLICT (content): Merge
+                    conflict in index.html. I resolved the file, staged it and completed the merge with the Resolve
+                    merge conflict in index commit.</p>
+                <img src="/Users/mohammadbaig/myprj/Screenshot 2026-09-16 at 10.02.25.png" alt="Git Conflict"
+                    onerror="this.style.display='none'">
+            </div>
+
+            <br>
+            <h4 class="question-title" style="font-size: 18px; margin-top: 30px;">Requirement 6 - Using Git stash for
+                unfinished work</h4>
+            <div class="terminal-output">
+                <p>After the merge work, index.html had an uncommitted modification. I did not want to commit that
+                    unfinished change yet, so I used git stash. The working tree became clean; later git stash pop
+                    restored the modification. This stash cycle immediately preceded the final push covered in
+                    Requirement 8.</p>
+                <img src="/Users/mohammadbaig/myprj/Screenshot 2026-09-16 at 10.06.17.png" alt="Git Stash"
+                    onerror="this.style.display='none'">
+            </div>
+
+            <br>
+            <h4 class="question-title" style="font-size: 18px; margin-top: 30px;">Requirement 7 - Checking history and
+                comparing versions</h4>
+            <div class="terminal-output">
+                <p>I used git log-oneline --decorate --graph-all to see the commit history together with branches and
+                    tags. To compare the two tagged versions, I used git diff v1.0 v2.0. I also used git show v1.0 and
+                    git show v2.0 to inspect the individual tagged versions.</p>
+                <img src="/Users/mohammadbaig/myprj/Screenshot 2026-09-16 at 10.08.37.png" alt="Git Log"
+                    onerror="this.style.display='none'">
+            </div>
+
+            <div class="page-break"></div>
+
+            <h4 class="question-title" style="font-size: 18px;">Requirement 8 - Connecting the project to GitHub</h4>
+            <div class="terminal-output">
+                <p>I connected the local repository to GitHub by adding a remote called origin and checked it with git
+                    remote -v. I pushed master with git push-u origin master, made the final index.html change,
+                    committed it with Finalize student grade calculator, pushed again and checked status.</p>
+                <img src="/Users/mohammadbaig/myprj/Gemini_Generated_Image_oogwm8oogwm8oogw.png" alt="GitHub Repository"
+                    onerror="this.style.display='none'">
+            </div>
+
+            <br>
+            <h4 class="question-title" style="font-size: 18px; margin-top: 30px;">Requirement 9: Git Commands Summary
+            </h4>
+            <div class="terminal-output">
+                <p>A quick summary of the primary Git commands utilized throughout the development of this project.</p>
+                <img src="/Users/mohammadbaig/myprj/Gemini_Generated_Image_q0ig26q0ig26q0ig.png" alt="Git Commands Used"
+                    onerror="this.style.display='none'">
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
